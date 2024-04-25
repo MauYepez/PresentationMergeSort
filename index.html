@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MergeSort Presentation</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet"
+    href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet"">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  </head>  
+  <body>
+
+      <!-- WELCOME SECTION-->
+      <header>
+                <a href="#" class="logo">MergeSort</a>
+                <div class="bx bx-menu" id="menu-icon"></div>
+                <ul class="navbar">
+                  <li><a href="#home">Home</a></li>
+                  <li><a href="#about">Slides</a></li>
+                  <li><a href="#demo">Demostration</a></li>
+                  <li><a href="#code">Code</a></li>
+              </ul>
+              <a href="#about" class="h-btn">Go to Slides</a>
+      </header>
+
+      <!-- Home SECTION-->
+      <section class="home" id="home">
+        <div class="home-text">
+            <h4>Slides Presentation</h4>
+            <h1>MergeSort Algorithm</h1>
+            <a href="#about" class="button1">Go to Slides</a>
+            <h2>Mauricio Yepez</h2>
+        </div>
+      </section>
+
+      <!-- ABOUT SECTION-->
+      <section class="about" id="about">
+          <div class="img">
+            <iframe src="https://onedrive.live.com/embed?resid=847F28765622EBD9%21205792&authkey=!AOSr0dc6CFMJOdQ&em=2" width="720" height="480" frameborder="0" scrolling="no"></iframe>
+          </div>
+      </section>
+
+      <!-- Demo SECTION-->
+      <section class="demo" id="demo">
+        <div class="demo-text">
+            <!-- partial:index.partial.html -->
+          <h4 id="orig">Original Array</h4>
+          <div id="originalarray">
+            <ul>
+              <li id="odd">9</li>
+              <li id="even">8</li>
+              <li id="odd">15</li>
+              <li id="even">89</li>
+              <li id="odd">1</li>
+              <li id="even">99</li>
+              <li id="odd">5</li>
+              <li id="even">5</li>
+              <li id="odd">20</li>
+              <li id="even">44</li>
+            </ul>
+          </div>
+
+          <div id="merge"> 
+
+            <span id="msg"></span>
+            <div id="drawing"></div>
+            <div id="controls">
+              <button onclick="window.toggle_turbo()">Turbo</button>&nbsp;
+              <button id="rewind_button" onclick="window.click_rewind()">Rewind</button>
+              <button id="play_button" onclick="window.click_play()">Play</button>&nbsp;
+              <button onclick="window.click_prev()">Previous</button>
+              <button onclick="window.click_next()">Next</button>&nbsp;
+            </div>
+            
+          </div>
+        </div>
+      </section>
+
+      <!-- Code SECTION-->
+      <section class="code" id="code">
+        <h2>Code</h2>
+        <div class="scroll">
+          <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'C')">C++</button>
+            <button class="tablinks" onclick="openCity(event, 'STL')">STL</button>
+          </div>
+          
+          <div id="C" class="tabcontent">
+            <pre>
+              <code>
+<span class="comment">// C++ program for Merge Sort</span>
+<p>#include &ltiostream&gt
+using namespace std;</p>
+                  
+<span class="comment">// Function to print the array.</span>
+<p>void printArray(int* arr, int length) 
+{
+    for (int i = 0; i < length; i++) 
+    {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+}</p>
+
+<span class="comment">// Function to merge the sub-arrays.</span>                  
+<p>void merge(int* arr, int left, int mid, int right) 
+{
+    int l, r, m;
+    int const lengthLeft = mid - left + 1;
+    int const lengthRight = right - mid;
+  
+    <span class="comment">// Creating two temp arrays to store left and right sub-arrays.</span>  
+    int* arrLeft = new int[lengthLeft];
+    int* arrRight = new int[lengthRight];
+  
+    <span class="comment">// Copying the data from the actual array to left and right temp arrays.</span>  
+    for (int a = 0; a < lengthLeft; a++) 
+    {
+        arrLeft[a] = arr[left + a];
+    }
+    for (int a = 0; a < lengthRight; a++) 
+    {
+        arrRight[a] = arr[mid + 1 + a];
+    }
+  
+    <span class="comment">// Merging the temp arrays back into the actual array.</span>  
+    l = 0; <span class="comment">// Starting index of arrLeft[].</span>
+    r = 0; <span class="comment">// Staring index of arrRight[].</span>
+    m = left; <span class="comment">// Starting index of merged subarray.</span>
+  
+    while (l < lengthLeft && r < lengthRight) 
+    {
+        <span class="comment">// Checking and placing the smaller number of both temp arrays into the main array.</span>
+        if (arrLeft[l] <= arrRight[r]) 
+        {
+            arr[m] = arrLeft[l];
+            l++;
+        }
+        else 
+        {
+            arr[m] = arrRight[r];
+            r++;
+        }
+        m++;
+    }
+  
+    <span class="comment">// After the successful execution of the above loop</span> 
+    <span class="comment">// copying the remaining elements of the left subarray (if remaining).</span> 
+    while (l < lengthLeft) 
+    {
+        arr[m] = arrLeft[l];
+        m++;
+        l++;
+    }
+
+    <span class="comment">// Copying the remaining elements of the right sub array (if remaining).</span> 
+    while (r < lengthRight) 
+    {
+        arr[m] = arrRight[r];
+        m++;
+        r++;
+    }
+}
+
+</p>                  
+                  
+<span class="comment">// The mergeSort() function.</span>                   
+<p>void mergeSort(int* arr, int left, int right) 
+{
+    int mid;
+
+    if (left < right) 
+    {
+        <span class="comment">// Calculating the mid.</span>
+        mid = (left + right) / 2;
+
+        <span class="comment">// Calling the function mergeSort() recursively and breaking down the given array into smaller sub arrays.</span>
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+
+        <span class="comment">// Calling the merge() function to merge the sorted subarrays into the main array.</span>
+        merge(arr, left, mid, right);
+    }
+}
+</p>                  
+                  
+<p>
+int main() 
+{
+    <span class="comment">// Initialzing the array.</span>
+    int arr[] = { 9, 8, 15, 89, 1, 99, 5, 5, 20, 44 };
+  
+    <span class="comment">// Calculating the length of the array.</span>
+    int length = sizeof(arr) / sizeof(int);
+  
+    <span class="comment">// Printing the array before sorting.</span>
+    cout << "\n\tArray, before calling the mergeSort(): \n\t";
+    printArray(arr, length);
+  
+    <span class="comment">// Calling the mergeSort() function.</span>
+    mergeSort(arr, 0, length - 1);
+  
+    <span class="comment">// Printing the array after sorting.</span>
+    cout << "\n\tArray, after calling the mergeSort(): \n\t";
+    printArray(arr, length);
+  
+    return 0;
+}
+</p>
+
+<h5 class="console">console execution:</h5>
+<img src="img/mergesortc.png" alt="mergesort console">
+              </code>
+            </pre>
+          </div>
+          
+          <div id="STL" class="tabcontent">
+         <pre>
+          <code>
+<span class="comment">// C++ code to demonstrate the working of merge() </span>
+<p>#include &ltalgorithm&gt 
+#include &ltiostream&gt
+#include &ltvector&gt
+
+using namespace std;
+</p> 
+<p>int main()
+{
+    <span class="comment">// initializing 1st container</span>
+    vector<int> arr1 = { 9, 8, 15, 89, 1 };
+    
+    <span class="comment">// initializing 2nd container</span>  
+    vector<int> arr2 = { 99, 5, 5, 20, 44 };
+    
+    <span class="comment">// declaring resultant container</span>  
+    vector<int> finalArr(10);
+    
+    <span class="comment">// sorting initial containers</span>  
+    sort(arr1.begin(), arr1.end());
+    sort(arr2.begin(), arr2.end());
+    
+    <span class="comment">// using merge() to merge the initial containers</span>
+    merge(arr1.begin(), arr1.end(), arr2.begin(), arr2.end(), finalArr.begin());
+    
+    <span class="comment">// printing the resultant merged container</span>
+    cout << "\n\tThe container after merging initial containers is:\n\t";
+    
+    for (int i = 0; i < finalArr.size(); i++)
+    {
+        cout << finalArr[i] << " ";
+    }
+    cout << endl;
+    
+    return 0;
+}
+</p>
+
+
+<h5 class="console">console execution:</h5>
+<img src="img/stlmergesort.png" alt="stl mergesort console">
+</code>
+         </pre> 
+          </div>
+          
+        </div>
+    </section>
+
+    <script>
+      function openCity(evt, cityName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+      </script>
+
+<!-- partial -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/svg.js/2.6.6/svg.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/color-js/1.0.1/color.min.js'></script>
+<script  src="./js/script.js"></script>
+<script>
+  let slideIndex = 1;
+  showSlides(slideIndex);
+  
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+  
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+  
+  function showSlides(n) {
+    let i;
+    let slides = document.getElementsByClassName("mySlides");
+    let dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {slideIndex = 1}    
+    if (n < 1) {slideIndex = slides.length}
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";  
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+  }
+  </script>
+
+  <script type="text/javascript" src='js/main.js'></script>
+
+  </body>
+  <footer>
+      <p>myepezma@aum.edu</p>
+      <div class="social">
+          <a href="#"></a>
+      </div>
+      <p class="end">&copy; Mauricio Yepez</p>
+  </footer>
+</html>
+
