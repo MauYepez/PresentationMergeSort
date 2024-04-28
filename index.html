@@ -44,7 +44,7 @@
       <!-- ABOUT SECTION-->
       <section class="about" id="about">
           <div class="img">
-            <iframe src="https://onedrive.live.com/embed?resid=847F28765622EBD9%21205792&authkey=!AOSr0dc6CFMJOdQ&em=2" width="720" height="480" frameborder="0" scrolling="no"></iframe>
+            <iframe src="https://onedrive.live.com/embed?resid=847F28765622EBD9%21205793&authkey=!AONk6fHQBJpRG6o&em=2" width="720" height="480" frameborder="0" scrolling="no"></iframe>
           </div>
       </section>
 
@@ -52,21 +52,27 @@
       <section class="demo" id="demo">
         <div class="demo-text">
             <!-- partial:index.partial.html -->
-          <h4 id="orig">Original Array</h4>
+          <h4 id="orig">&nbsp;&nbsp;&nbsp;&nbsp;subarray_A&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;subarray_B</h4>
           <div id="originalarray">
             <ul>
-              <li id="odd">9</li>
-              <li id="even">8</li>
-              <li id="odd">15</li>
-              <li id="even">89</li>
-              <li id="odd">1</li>
-              <li id="even">99</li>
-              <li id="odd">5</li>
-              <li id="even">5</li>
-              <li id="odd">20</li>
-              <li id="even">44</li>
+              <li>
+                <li id="odd">1</li>
+                <li id="even">8</li>
+                <li id="odd">9</li>
+                <li id="even">15</li>
+              </li>
+              <li>
+                <li id="odd">5</li>
+                <li id="even">5</li>
+                <li id="odd">44</li>
+                <li id="even">99</li>
+              </li>
+            </ul>
+            <ul>
+              
             </ul>
           </div>
+          
 
           <div id="merge"> 
 
@@ -99,125 +105,125 @@
 <span class="comment">// C++ program for Merge Sort</span>
 <p>#include &ltiostream&gt
 using namespace std;</p>
-                  
-<span class="comment">// Function to print the array.</span>
-<p>void printArray(int* arr, int length) 
-{
-    for (int i = 0; i < length; i++) 
-    {
-        cout << arr[i] << " ";
-    }
-    cout << endl;
-}</p>
-
-<span class="comment">// Function to merge the sub-arrays.</span>                  
-<p>void merge(int* arr, int left, int mid, int right) 
-{
-    int l, r, m;
-    int const lengthLeft = mid - left + 1;
-    int const lengthRight = right - mid;
-  
-    <span class="comment">// Creating two temp arrays to store left and right sub-arrays.</span>  
-    int* arrLeft = new int[lengthLeft];
-    int* arrRight = new int[lengthRight];
-  
-    <span class="comment">// Copying the data from the actual array to left and right temp arrays.</span>  
-    for (int a = 0; a < lengthLeft; a++) 
-    {
-        arrLeft[a] = arr[left + a];
-    }
-    for (int a = 0; a < lengthRight; a++) 
-    {
-        arrRight[a] = arr[mid + 1 + a];
-    }
-  
-    <span class="comment">// Merging the temp arrays back into the actual array.</span>  
-    l = 0; <span class="comment">// Starting index of arrLeft[].</span>
-    r = 0; <span class="comment">// Staring index of arrRight[].</span>
-    m = left; <span class="comment">// Starting index of merged subarray.</span>
-  
-    while (l < lengthLeft && r < lengthRight) 
-    {
-        <span class="comment">// Checking and placing the smaller number of both temp arrays into the main array.</span>
-        if (arrLeft[l] <= arrRight[r]) 
-        {
-            arr[m] = arrLeft[l];
-            l++;
-        }
-        else 
-        {
-            arr[m] = arrRight[r];
-            r++;
-        }
-        m++;
-    }
-  
-    <span class="comment">// After the successful execution of the above loop</span> 
-    <span class="comment">// copying the remaining elements of the left subarray (if remaining).</span> 
-    while (l < lengthLeft) 
-    {
-        arr[m] = arrLeft[l];
-        m++;
-        l++;
-    }
-
-    <span class="comment">// Copying the remaining elements of the right sub array (if remaining).</span> 
-    while (r < lengthRight) 
-    {
-        arr[m] = arrRight[r];
-        m++;
-        r++;
-    }
-}
-
-</p>                  
-                  
-<span class="comment">// The mergeSort() function.</span>                   
-<p>void mergeSort(int* arr, int left, int right) 
-{
-    int mid;
-
-    if (left < right) 
-    {
-        <span class="comment">// Calculating the mid.</span>
-        mid = (left + right) / 2;
-
-        <span class="comment">// Calling the function mergeSort() recursively and breaking down the given array into smaller sub arrays.</span>
-        mergeSort(arr, left, mid);
-        mergeSort(arr, mid + 1, right);
-
-        <span class="comment">// Calling the merge() function to merge the sorted subarrays into the main array.</span>
-        merge(arr, left, mid, right);
-    }
-}
-</p>                  
-                  
-<p>
-int main() 
+<p>void PrintArray(int* array, int length);
+void DivideArray(int* array, int begin, int end);
+void MergeSubarrays(int* array, int begin, int middle, int end);</p>    
+<p>int main() 
 {
     <span class="comment">// Initialzing the array.</span>
-    int arr[] = { 9, 8, 15, 89, 1, 99, 5, 5, 20, 44 };
-  
+    int main_array[] = { 9, 8, 15, 1, 99, 5, 5, 44 };
+    
     <span class="comment">// Calculating the length of the array.</span>
-    int length = sizeof(arr) / sizeof(int);
-  
+    int length_main_array = sizeof(main_array) / sizeof(int);
+    
     <span class="comment">// Printing the array before sorting.</span>
-    cout << "\n\tArray, before calling the mergeSort(): \n\t";
-    printArray(arr, length);
-  
-    <span class="comment">// Calling the mergeSort() function.</span>
-    mergeSort(arr, 0, length - 1);
-  
+    cout << "\n\tArray, before using the MergeSort: \n\t";
+    PrintArray(main_array, length_main_array);
+    
+    <span class="comment">// Calling the mergeSort named DivideArray function.</span>
+    DivideArray(main_array, 0, length_main_array - 1);
+    
     <span class="comment">// Printing the array after sorting.</span>
-    cout << "\n\tArray, after calling the mergeSort(): \n\t";
-    printArray(arr, length);
-  
+    cout << "\n\tArray, after using the MergeSort: \n\t";
+    PrintArray(main_array, length_main_array);
+    
     return 0;
 }
 </p>
+<span class="comment">// Function to print the array.</span>
+<p>void PrintArray(int* main_array, int length_main_array)
+{
+    for (int iterator = 0; iterator < length_main_array; iterator++)
+    {
+        cout << main_array[iterator] << " ";
+    }
+    cout << endl;
+}</p>
+</p>                                  
+<span class="comment">// The mergeSort function named DivideArray() function.</span>                   
+<p>void DivideArray(int* array, int begin, int end) 
+{
+    int middle;
+
+    if (begin < end) 
+    {
+        <span class="comment">// Calculating the middle.</span>
+        middle = (begin + end) / 2;
+
+        <span class="comment"> // Calling the function DivideArray() recursively and breaking down the given array into smaller sub arrays.</span>
+        DivideArray(array, begin, middle);
+        DivideArray(array, middle + 1, end);
+
+        <span class="comment">// Calling the MergeSubarrays() function to merge the sorted subarrays into the main array.</span>
+        MergeSubarrays(array, begin, middle, end);
+    }
+}
+</p>            
+
+<span class="comment">// Function to merge the sub-arrays.</span>                  
+<p>void MergeSubarrays(int* main_array, int begin, int middle, int end)
+{
+    int index_A, index_B, index_main_array;
+  
+    int const length_A = middle - begin + 1;
+    int const length_B = end - middle;
+  
+    <span class="comment">// Creating two temp arrays to store left and right sub-arrays.  </span>  
+    int* subarray_A = new int[length_A];
+    int* subarray_B = new int[length_B];
+  
+    <span class="comment">// Copying the data from the actual array to subarray_A and subarray_B temp arrays.</span>  
+    for (int iterator = 0; iterator < length_A; iterator++)
+    {
+        subarray_A[iterator] = main_array[begin + iterator];
+    }
+    for (int iterator = 0; iterator < length_B; iterator++)
+    {
+        subarray_B[iterator] = main_array[middle + 1 + iterator];
+    }
+  
+    <span class="comment">// Merging the temp arrays back into the actual array.</span>  
+    index_A = 0; <span class="comment">// Starting index of subarray_A[].</span>
+    index_B = 0; <span class="comment">// Staring index of subarray_B[].</span>
+    index_main_array = begin; <span class="comment">// Starting index of main array.</span>
+  
+    while (index_A < length_A && index_B < length_B) 
+    {
+        <span class="comment">// Checking and placing the smaller number of both temp arrays into the main array.</span>
+        if (subarray_A[index_A] <= subarray_B[index_B])
+        {
+            main_array[index_main_array] = subarray_A[index_A];
+            index_A++;
+        }
+        else
+        {
+            main_array[index_main_array] = subarray_B[index_B];
+            index_B++;
+        }
+        index_main_array++;
+    }
+  
+    <span class="comment">// After the successful execution of the above loop</span> 
+    <span class="comment">// copying the remaining elements of the subarray_A subarray (if remaining).</span> 
+    while (index_A < length_A)
+    {
+        main_array[index_main_array] = subarray_A[index_A];
+        index_main_array++;
+        index_A++;
+    }
+
+    <span class="comment">// Copying the remaining elements of the subarray_B sub array (if remaining).</span> 
+    while (index_B < length_B)
+    {
+        main_array[index_main_array] = subarray_B[index_B];
+        index_main_array++;
+        index_B++;
+    }
+}
+</p>                                                            
 
 <h5 class="console">console execution:</h5>
-<img src="img/mergesortc.png" alt="mergesort console">
+<img src="img/mergescpp.PNG" alt="mergesort console">
               </code>
             </pre>
           </div>
@@ -234,28 +240,40 @@ using namespace std;
 </p> 
 <p>int main()
 {
-    <span class="comment">// initializing 1st container</span>
-    vector &ltint&gt  arr1 = { 9, 8, 15, 89, 1 };
+    <span class="comment">// initializing subarray_A</span>
+    vector&lt;int&gt; subarray_A = { 9, 8, 15, 1 };
     
-    <span class="comment">// initializing 2nd container</span>  
-    vector &ltint&gt  arr2 = { 99, 5, 5, 20, 44 };
+    <span class="comment">// initializing subarray_B</span>  
+    vector&lt;int&gt; subarray_B = { 99, 5, 5, 44 };
     
     <span class="comment">// declaring resultant container</span>  
-    vector &ltint&gt  finalArr(10);
+    vector&lt;int&gt; main_array(8);
     
     <span class="comment">// sorting initial containers</span>  
-    sort(arr1.begin(), arr1.end());
-    sort(arr2.begin(), arr2.end());
+    sort(subarray_A.begin(), subarray_A.end());
+    sort(subarray_B.begin(), subarray_B.end());
     
     <span class="comment">// using merge() to merge the initial containers</span>
-    merge(arr1.begin(), arr1.end(), arr2.begin(), arr2.end(), finalArr.begin());
+    merge(subarray_A.begin(), subarray_A.end(), subarray_B.begin(), subarray_B.end(), main_array.begin());
     
     <span class="comment">// printing the resultant merged container</span>
+    cout << "\n\tsubarray_A:\n\t";
+    for (int i = 0; i < subarray_A.size(); i++)
+    {
+        cout << subarray_A[i] << " ";
+    }
+    cout << endl;
+    cout << "\n\tsubarray_B:\n\t";
+    for (int i = 0; i < subarray_B.size(); i++)
+    {
+        cout << subarray_B[i] << " ";
+    }
+    cout << endl;
     cout << "\n\tThe container after merging initial containers is:\n\t";
     
-    for (int i = 0; i < finalArr.size(); i++)
+    for (int i = 0; i < main_array.size(); i++)
     {
-        cout << finalArr[i] << " ";
+        cout << main_array[i] << " ";
     }
     cout << endl;
     
@@ -265,7 +283,7 @@ using namespace std;
 
 
 <h5 class="console">console execution:</h5>
-<img src="img/stlmergesort.png" alt="stl mergesort console">
+<img src="img/mergesstl.PNG" alt="stl mergesort console">
 </code>
          </pre> 
           </div>

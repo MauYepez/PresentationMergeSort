@@ -2,8 +2,8 @@
   var Act, Color, autorun, autorun_dur, autorun_loop, biggest_bbox, buttons_edit_playing, buttons_edit_rewinding, buttons_edit_stopped, do_step, dur_index, durations, init_draw_array, init_pointers, main, max, merge, state, undo_step;
 
   state = {
-    left: [1, 8, 9, 15, 89],
-    right: [5, 5, 20, 44, 99]
+    left: [1, 8, 9, 15],
+    right: [5, 5, 44, 99]
   };
 
   state.A = state.left.concat(state.right);
@@ -28,7 +28,7 @@
     while (p1 < c && p2 < r) { // O(k) fill temp storage
       yield ({
         act: Act.none,
-        msg: `Comparing A[l] > A[r]: is ${A[p1]} > ${A[p2]} ?`
+        msg: `Comparing subarray_A[index_a] > subarray_B[index_b]: is ${A[p1]} > ${A[p2]} ?`
       });
       if (A[p1] <= A[p2]) {
         yield ({
@@ -36,7 +36,7 @@
           t: t,
           l: p1,
           r: p2,
-          msg: `No: ${A[p1]} ${A[p1] === A[p2] ? '==' : '<'} ${A[p2]} thus output A[l] == ${A[p1]} from left`
+          msg: `No: ${A[p1]} ${A[p1] === A[p2] ? '==' : '<'} ${A[p2]} thus output main_array[index_main] = ${A[p1]} from subarray_A`
         });
         p1 += 1; // O(1) increment left pointer
         yield ({
@@ -44,7 +44,7 @@
           t: t,
           l: p1,
           r: p2,
-          msg: "Increment l"
+          msg: "Increment index_a"
         });
       } else {
         yield ({
@@ -52,7 +52,7 @@
           t: t,
           l: p1,
           r: p2,
-          msg: `Yes: ${A[p1]} > ${A[p2]} thus output A[r] == ${A[p2]} from right`
+          msg: `Yes: ${A[p1]} > ${A[p2]} thus output main_array[index_main] = ${A[p2]} from subarray_B`
         });
         p2 += 1; // O(1) increment right pointer
         yield ({
@@ -60,7 +60,7 @@
           t: t,
           l: p1,
           r: p2,
-          msg: "Increment r"
+          msg: "Increment index_b"
         });
       }
       t += 1; // O(1) increment temp pointer
@@ -69,7 +69,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: "Increment m"
+        msg: "Increment index_main"
       });
     }
     // copy remaining left side
@@ -79,7 +79,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: `Output remaining A[l] == ${A[p1]}`
+        msg: `Output remaining subarray_A[index_a] == ${A[p1]}`
       });
       p1 += 1; // O(1) increment left pointer
       yield ({
@@ -87,7 +87,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: "Increment l"
+        msg: "Increment index_a"
       });
       t += 1; // O(1) increment temp pointer
       yield ({
@@ -95,7 +95,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: "Increment m"
+        msg: "Increment index_main"
       });
     }
     // copy remaining right side
@@ -105,7 +105,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: `Output remaining A[r] == ${A[p2]}`
+        msg: `Output remaining subarray_B[index_b] == ${A[p2]}`
       });
       p2 += 1; // O(1) increment right pointer
       yield ({
@@ -113,7 +113,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: "Increment r"
+        msg: "Increment index_b"
       });
       t += 1; // O(1) increment temp pointer
       yield ({
@@ -121,7 +121,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: "Increment m"
+        msg: "Increment index_main"
       });
     }
     return (yield {
@@ -244,23 +244,23 @@
     lrect = left.rect(bbox.width, bbox.height).fill({
       opacity: 0
     }).stroke('#000').move(0, top_y);
-    ltext = left.text("l").font({
+    ltext = left.text("a").font({
       family: "Monospace",
       size: 32
     }).center(lrect.cx(), lrect.cy() - bbox.height);
     rrect = right.rect(bbox.width, bbox.height).fill({
       opacity: 0
     }).stroke('#000').move(bbox.width * c, top_y);
-    rtext = right.text("r").font({
+    rtext = right.text("b").font({
       family: "Monospace",
       size: 32
     }).center(rrect.cx(), rrect.cy() - bbox.height);
     orect = out.rect(bbox.width, bbox.height).fill({
       opacity: 0
     }).stroke('#000').move(0, bot_y);
-    otext = out.text("m").font({
+    otext = out.text("main").font({
       family: "Monospace",
-      size: 32
+      size: 28
     });
     otext.center(orect.cx(), orect.cy() + bbox.height);
     return {
