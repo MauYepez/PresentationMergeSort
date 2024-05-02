@@ -36,7 +36,7 @@
           t: t,
           l: p1,
           r: p2,
-          msg: `No: ${A[p1]} ${A[p1] === A[p2] ? '==' : '<'} ${A[p2]} thus output main_array[index_main] = ${A[p1]} from subarray_A`
+          msg: `No: ${A[p1]} ${A[p1] === A[p2] ? '==' : '<'} ${A[p2]} thus output array_C[index_c] = ${A[p1]} from subarray_A`
         });
         p1 += 1; // O(1) increment left pointer
         yield ({
@@ -52,7 +52,7 @@
           t: t,
           l: p1,
           r: p2,
-          msg: `Yes: ${A[p1]} > ${A[p2]} thus output main_array[index_main] = ${A[p2]} from subarray_B`
+          msg: `Yes: ${A[p1]} > ${A[p2]} thus output array_C[index_c] = ${A[p2]} from subarray_B`
         });
         p2 += 1; // O(1) increment right pointer
         yield ({
@@ -69,7 +69,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: "Increment index_main"
+        msg: "Increment index_c"
       });
     }
     // copy remaining left side
@@ -95,7 +95,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: "Increment index_main"
+        msg: "Increment index_c"
       });
     }
     // copy remaining right side
@@ -121,7 +121,7 @@
         t: t,
         l: p1,
         r: p2,
-        msg: "Increment index_main"
+        msg: "Increment index_c"
       });
     }
     return (yield {
@@ -244,23 +244,23 @@
     lrect = left.rect(bbox.width, bbox.height).fill({
       opacity: 0
     }).stroke('#000').move(0, top_y);
-    ltext = left.text("a").font({
+    ltext = left.text("idx_a").font({
       family: "Monospace",
-      size: 32
+      size: 24
     }).center(lrect.cx(), lrect.cy() - bbox.height);
     rrect = right.rect(bbox.width, bbox.height).fill({
       opacity: 0
     }).stroke('#000').move(bbox.width * c, top_y);
-    rtext = right.text("b").font({
+    rtext = right.text("idx_b").font({
       family: "Monospace",
-      size: 32
+      size: 24
     }).center(rrect.cx(), rrect.cy() - bbox.height);
     orect = out.rect(bbox.width, bbox.height).fill({
       opacity: 0
     }).stroke('#000').move(0, bot_y);
-    otext = out.text("main").font({
+    otext = out.text("idx_c").font({
       family: "Monospace",
-      size: 28
+      size: 24
     });
     otext.center(orect.cx(), orect.cy() + bbox.height);
     return {
